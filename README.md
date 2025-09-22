@@ -6,7 +6,7 @@ Hello
 
 [![LICENSE](https://img.shields.io/github/license/40794444PhoneMyatKyaw/sem.svg?style=flat-square)](https://github.com/40794444PhoneMyatKyaw/sem/blob/master/LICENSE)
 
-[![Releases](https://img.shields.io/github/release/40794444PhoneMyatKyaw/DevOpsLab/all.svg?style=flat-square)](https://github.com/40794444PhoneMyatKyaw/DevOpsLab/releases)
+[![Releases](https://img.shields.io/github/release/40794444PhoneMyatKyaw/sem/all.svg?style=flat-square)](https://github.com/40794444PhoneMyatKyaw/sem/releases)
 
 # Software Engineering Methods
 
