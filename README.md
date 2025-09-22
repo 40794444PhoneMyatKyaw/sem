@@ -2,7 +2,7 @@
 Testing with DevOpsLab
 Hello
 
-![GitHub Workflow Status (branch)](https://img.shields.io/github/actions/workflow/status/40794444PhoneMyatKyaw/DevOpsLab/main.yml?branch=master)
+![GitHub Workflow Status (branch)](https://img.shields.io/github/actions/workflow/status/40794444PhoneMyatKyaw/sem/main.yml?branch=<branch name>)
 
 [![LICENSE](https://img.shields.io/github/license/40794444PhoneMyatKyaw/DevOpsLab.svg?style=flat-square)](https://github.com/40794444PhoneMyatKyaw/DevOpsLab/blob/master/LICENSE)
 
