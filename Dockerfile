@@ -1,8 +1,4 @@
 FROM openjdk:latest
-
-# Copy the actual JAR that exists in target/
-COPY ./target/seMethods-0.1.0.2-jar-with-dependencies.jar /tmp
-
-WORKDIR /tmp
-
-ENTRYPOINT ["java", "-jar", "seMethods-0.1.0.2-jar-with-dependencies.jar"]
+WORKDIR /app
+COPY ./target/*-jar-with-dependencies.jar /app/app.jar
+CMD ["java", "-jar", "/app/app.jar"]
