@@ -1,4 +1,4 @@
-FROM openjdk:latest
-WORKDIR /app
-COPY ./target/*-jar-with-dependencies.jar /app/app.jar
-CMD ["java", "-jar", "/app/app.jar"]
+FROM eclipse-temurin:18
+COPY ./target/sem-0.1.0.2-jar-with-dependencies.jar /tmp
+WORKDIR /tmp
+CMD ["java", "-jar", "sem-0.1.0.2-jar-with-dependencies.jar"]

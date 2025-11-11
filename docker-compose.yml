@@ -1,34 +1,14 @@
+version: '3'
 services:
+  app:
+    build: .
+
   db:
-    build: ./db
+    build: db/.
+    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: example
       MYSQL_DATABASE: employees
-      MYSQL_USER: app
-      MYSQL_PASSWORD: example
-    volumes:
-      - mysqldata:/var/lib/mysql
+      MYSQL_ROOT_HOST: '%'
     ports:
-      - "33070:3306"   # optional: only if you want host access
-    healthcheck:
-      # Use TCP to avoid passing while the temporary socket-only server is up
-      test: ["CMD-SHELL", "mysql -h 127.0.0.1 -uroot -pexample -e 'SELECT 1'"]
-      interval: 5s
-      timeout: 3s
-      retries: 60
-
-  app:
-    build: .
-    environment:
-      DB_HOST: db
-      DB_PORT: "3306"
-      DB_USER: app
-      DB_PASSWORD: example
-      DB_NAME: employees
-    depends_on:
-      db:
-        condition: service_healthy
-    # your app is a one-shot CLI; it will exit after printing the result (exit 0)
-
-volumes:
-  mysqldata:
+      - "33060:3306"
