@@ -1,4 +1,4 @@
 FROM eclipse-temurin:18
-COPY ./target/devops-jar-with-dependencies.jar /tmp
+COPY ./target/devops.jar /tmp
 WORKDIR /tmp
-CMD ["java", "-jar", "devops-jar-with-dependencies.jar"]
+CMD ["java", "-jar", "devops.jar"]
