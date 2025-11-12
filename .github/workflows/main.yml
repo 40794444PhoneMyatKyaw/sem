@@ -1,9 +1,6 @@
 name: A workflow for my Hello World App
-on:
-  push:
-    branches:
-      - master
-      - lab08
+on: push
+
 jobs:
   UnitTests:
     name: Unit Tests
@@ -19,7 +16,7 @@ jobs:
           java-version: '18'
           distribution: 'temurin'
       - name: Unit Tests
-        run: mvn -Dtest=com.napier.devops.AppTest test
+        run: mvn -Dtest=com.napier.sem.AppTest test
 
   IntegrationTests:
     name: Integration Tests
@@ -41,7 +38,7 @@ jobs:
           mvn -Dtest=com.napier.devops.AppIntegrationTest test
           docker stop employees
           docker rm employees
-          docker image rm database                    
+          docker image rm database 
 
   build:
     name: Build and Start Using docker-compose
