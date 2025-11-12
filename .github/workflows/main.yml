@@ -14,7 +14,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: '18'
-          distribution: 'adopt'
+          distribution: 'temurin'
       - name: Unit Tests
         run: mvn -Dtest=com.napier.sem.AppTest test
 
@@ -30,7 +30,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: '18'
-          distribution: 'adopt'
+          distribution: 'temurin'
       - name: Package and Run docker compose
         run: |
           mvn package -DskipTests
