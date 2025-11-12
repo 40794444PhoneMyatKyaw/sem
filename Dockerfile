@@ -1,7 +1,7 @@
 FROM eclipse-temurin:18
 COPY ./target/devops.jar /tmp
 WORKDIR /tmp
-CMD ["java", "-jar", "devops.jar"]
+ENTRYPOINT ["java", "-jar", "devops.jar", "db:3306", "30000"]
 
 #FROM eclipse-termurin:18
 #COPY ./target/devops.jar /tmp
