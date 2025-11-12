@@ -8,7 +8,7 @@ public class App {
     private Connection con = null;
 
     /**
-     * Connect to the MySQL database. aaaa
+     * Connect to the MySQL database.
      */
     public void connect(String location, int delay) {
         try {
