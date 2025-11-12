@@ -10,39 +10,38 @@ public class App {
     /**
      * Connect to the MySQL database.
      */
-    public void connect()
-    {
-        try
-        {
+    public void connect(String location, int delay) {
+        try {
             // Load Database driver
             Class.forName("com.mysql.cj.jdbc.Driver");
-        }
-        catch (ClassNotFoundException e)
-        {
+        } catch (ClassNotFoundException e) {
             System.out.println("Could not load SQL driver");
             System.exit(-1);
         }
 
-        int retries = 15;
-        for (int i = 0; i < retries; ++i)
-        {
+        int retries = 10;
+        boolean shouldWait = false;
+        for (int i = 0; i < retries; ++i) {
             System.out.println("Connecting to database...");
-            try
-            {
-                // Wait a bit for db to start
-                Thread.sleep(30000);
+            try {
+                if (shouldWait) {
+                    // Wait a bit for db to start
+                    Thread.sleep(delay);
+                }
+
                 // Connect to database
-                con = DriverManager.getConnection("jdbc:mysql://db:3306/employees?useSSL=false&allowPublicKeyRetrieval=true", "root", "example");
+                con = DriverManager.getConnection("jdbc:mysql://" + location
+                                + "/employees?allowPublicKeyRetrieval=true&useSSL=false",
+                        "root", "example");
                 System.out.println("Successfully connected");
                 break;
-            }
-            catch (SQLException sqle)
-            {
-                System.out.println("Failed to connect to database attempt " + Integer.toString(i));
+            } catch (SQLException sqle) {
+                System.out.println("Failed to connect to database attempt " + i);
                 System.out.println(sqle.getMessage());
-            }
-            catch (InterruptedException ie)
-            {
+
+                // Let's wait before attempting to reconnect
+                shouldWait = true;
+            } catch (InterruptedException ie) {
                 System.out.println("Thread interrupted? Should not happen.");
             }
         }
@@ -211,29 +210,23 @@ public class App {
 
 
     public static void main(String[] args) {
+        // Create new Application and connect to database
         App a = new App();
-        a.connect();
 
-        Department sales = a.getDepartment("Sales");
-
-        if (sales != null) {
-            ArrayList<Employee> salesEmployees = a.getSalariesByDepartment(sales);
-
-            if (salesEmployees == null || salesEmployees.isEmpty()) {
-                System.out.println("No employees found for department: " + sales.dept_name);
-            } else {
-                System.out.println(String.format("%-10s %-15s %-20s %-10s",
-                        "Emp No", "First Name", "Last Name", "Salary"));
-                for (Employee emp : salesEmployees) {
-                    if (emp == null) continue;
-                    System.out.println(String.format("%-10d %-15s %-20s %-10d",
-                            emp.emp_no, emp.first_name, emp.last_name, emp.salary));
-                }
-            }
+        if (args.length < 1) {
+            a.connect("localhost:33060", 10000);
         } else {
-            System.out.println("Department not found.");
+            a.connect(args[0], Integer.parseInt(args[1]));
         }
 
+        Department dept = a.getDepartment("Development");
+        ArrayList<Employee> employees = a.getSalariesByDepartment(dept);
+
+
+        // Print salary report
+        a.printSalaries(employees);
+
+        // Disconnect from database
         a.disconnect();
     }
 
