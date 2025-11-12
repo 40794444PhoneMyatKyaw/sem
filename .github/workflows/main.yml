@@ -33,12 +33,8 @@ jobs:
           distribution: 'temurin'
       - name: Integration Tests
         run: |
-          docker build -t database ./db 
-          docker run --name employees -dp 33060:3306 database
-          mvn -Dtest=com.napier.sem.AppIntegrationTest test
-          docker stop employees
-          docker rm employees
-          docker image rm database 
+          docker compose up -d db
+          mvn -Dtest=com.napier.sem.AppIntegrationTest test 
 
   build:
     name: Build and Start Using docker-compose
